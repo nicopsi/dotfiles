@@ -1,1 +1,1 @@
-# nico-configs
+# dotfiles
