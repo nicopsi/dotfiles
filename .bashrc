@@ -85,7 +85,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -96,7 +96,8 @@ alias l='ls -CF'
 ##########  My settings  ##########
 ###################################
 
-#neofetch
+# Set default editor as vim
+export EDITOR=”vim”
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -153,7 +154,7 @@ bash_prompt_command() {
 	# Which length to use
 	pwdmaxlen=$(( ( pwdmaxlen < ${#dir} ) ? ${#dir} : pwdmaxlen ))
 
-	NEW_PWD=${PWD/#$HOME/\ }
+	NEW_PWD=${PWD/#$HOME/\~}
 
 	local pwdoffset=$(( ${#NEW_PWD} - pwdmaxlen ))
 
@@ -164,9 +165,6 @@ bash_prompt_command() {
 		NEW_PWD=${trunc_symbol}/${NEW_PWD#*/}
 	fi
 }
-
-
-
 
 ##
 ##	GENERATE A FORMAT SEQUENCE
@@ -192,7 +190,6 @@ format_font()
 		;;
 	esac
 }
-
 
 
 ##

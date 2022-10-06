@@ -51,6 +51,11 @@ if has('syntax') && has('eval')
   packadd! matchit
 endif
 
+" Set variables
 set number
-set noic
+set ignorecase
+set smartcase
+" set clipboard=unnamedplus
+
 colorscheme ron
+
