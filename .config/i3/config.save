@@ -1,0 +1,503 @@
+###########################################
+########### nicokei (05Sep2021) ###########
+###########################################
+########### i3 config file      ###########
+###########################################
+
+## Set variables ##
+###################
+
+# Mod key (Win=Mod4; Alt=Mod1)
+set $mod Mod4
+# Terminal
+set $term kitty
+set $term-win kitty
+# Browsers
+set $browser1 brave-browser
+set $browser1-win Brave-browser 
+set $browser2 firefox
+set $browser2-win Firefox
+# Calculator
+set $calc gnome-calculator
+set $calc-win Gnome-calculator
+#File Manager
+set $files nemo
+set $files-win Nemo
+
+## Set color variables ##
+#########################
+
+set $bg-color			#5d666b
+set $inactive-bg-color		#2f343f
+set $text-color			#f3f4f5
+set $inactive-text-color	#676e7d
+set $urgent-bg-color		#e53935
+set $indicator-color		#a0a0a0 
+
+## Focus color picker ##
+#Violet#
+#set $focused-color       	#930787		
+#Dark green#
+#set $focused-color		#27742A	
+#Dark blue#
+#set $focused-color		#32506f		
+#Adwaita blue#
+set $focused-color		#15539E	
+
+## Set fonts ##
+###############
+# Fix Xft.dpi in ~/.Xresources according to your monitor resolution and size. Don't change font size here.
+
+# Title bars
+font pango:Roboto Regular 10
+
+## Set window colors ##
+#######################
+
+# class                 border              background	       text			indicator   
+client.focused          $bg-color           $focused-color     $text-color         	$indicator-color
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color	$indicator-color
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color	$indicator-color
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color         	$indicator-color
+
+## Set screenlock on suspend and screen blank ##
+################################################
+
+exec --no-startup-id xset dpms 600 600 10 
+
+# Lock with light-locker 
+exec --no-startup-id light-locker
+exec --no-startup-id xss-lock --transfer-sleep-lock -- "light-locker-command -l"
+
+# Manual lock
+#bindsym $mod+Delete exec --no-startup-id "light-locker-command -l"
+#bindsym $mod+Delete exec --no-startup-id "i3lock -e -i ~/Pictures/Backgrounds/MaterialDesign/BlueBlack.png" 
+bindsym $mod+Delete exec "~/.config/i3/scripts/blur-lock.sh"
+
+## Brightness and Volume controls ##
+####################################
+
+## Set Brightness ##
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+
+# First activate light with 'sudo chmod u+s /usr/bin/light' 
+bindsym XF86MonBrightnessUp exec light -A 2
+bindsym XF86MonBrightnessDown exec light -U 2
+
+## Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+###########################
+#### Window management ####
+###########################
+
+## Set default layout (default, tabbed, stacking)
+workspace_layout default
+
+## Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+## kill focused window
+bindsym $mod+x kill
+bindsym --release $mod+Shift+x exec xkill 
+
+## Desktop notifications
+exec --no-startup-id /usr/bin/dunst
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+o split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+## Resize window (you can also use the mouse for that)##
+########################################################
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# resize floating windows with mouse scroll:
+bindsym --whole-window --border $mod+button4 resize shrink height 5 px or 5 ppt
+bindsym --whole-window --border $mod+button5 resize grow height 5 px or 5 ppt
+bindsym --whole-window --border $mod+shift+button4 resize shrink width 5 px or 5 ppt
+bindsym --whole-window --border $mod+shift+button5 resize grow width 5 px or 5 ppt
+
+floating_minimum_size 75 x 50
+floating_maximum_size 1536 x 864
+
+####################
+#### Workspaces ####
+####################
+ 
+workspace_auto_back_and_forth yes
+
+## Name workspace variables ##
+set $ws1 "1  "
+set $ws2 "2  "
+set $ws3 "3  "
+set $ws4 "4  "
+set $ws5 "5  "
+set $ws6 "6  "
+set $ws7 "7  "
+set $ws8 "8  "
+set $ws9 "9 MON-9"
+set $ws10 "10 MON-0"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# switch to workspace with numpad keys
+bindcode $mod+87 workspace $ws1
+bindcode $mod+88 workspace $ws2
+bindcode $mod+89 workspace $ws3
+bindcode $mod+83 workspace $ws4
+bindcode $mod+84 workspace $ws5
+bindcode $mod+85 workspace $ws6
+bindcode $mod+79 workspace $ws7
+bindcode $mod+80 workspace $ws8
+bindcode $mod+81 workspace $ws9
+bindcode $mod+90 workspace $ws10
+
+# switch to workspace with numlock numpad keys
+bindcode $mod+Mod2+87 workspace $ws1
+bindcode $mod+Mod2+88 workspace $ws2
+bindcode $mod+Mod2+89 workspace $ws3
+bindcode $mod+Mod2+83 workspace $ws4
+bindcode $mod+Mod2+84 workspace $ws5
+bindcode $mod+Mod2+85 workspace $ws6
+bindcode $mod+Mod2+79 workspace $ws7
+bindcode $mod+Mod2+80 workspace $ws8
+bindcode $mod+Mod2+81 workspace $ws9
+bindcode $mod+Mod2+90 workspace $ws10
+
+# Workspace distribution for multiple displays
+#workspace $ws1 output primary 
+#workspace $ws2 output primary
+workspace $ws3 output primary
+#workspace $ws4 output primary
+workspace $ws5 output primary
+workspace $ws6 output primary
+#workspace $ws7 output primary
+#workspace $ws8 output primary
+workspace $ws9 output HDMI-1
+workspace $ws10 output HDMI-1
+
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Tab workspace back_and_forth
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# move focused container to workspace with numlock numpad keys
+bindcode $mod+Shift+Mod2+87 	move container to workspace  $ws1
+bindcode $mod+Shift+Mod2+88 	move container to workspace  $ws2
+bindcode $mod+Shift+Mod2+89 	move container to workspace  $ws3
+bindcode $mod+Shift+Mod2+83 	move container to workspace  $ws4
+bindcode $mod+Shift+Mod2+84 	move container to workspace  $ws5
+bindcode $mod+Shift+Mod2+85 	move container to workspace  $ws6
+bindcode $mod+Shift+Mod2+79 	move container to workspace  $ws7
+bindcode $mod+Shift+Mod2+80 	move container to workspace  $ws8
+bindcode $mod+Shift+Mod2+81 	move container to workspace  $ws9
+bindcode $mod+Shift+Mod2+90 	move container to workspace  $ws10
+
+# move focused container to workspace with numpad keys
+bindcode $mod+Shift+87 	 move container to workspace  $ws1
+bindcode $mod+Shift+88 	 move container to workspace  $ws2
+bindcode $mod+Shift+89 	 move container to workspace  $ws3
+bindcode $mod+Shift+83 	 move container to workspace  $ws4
+bindcode $mod+Shift+84 	 move container to workspace  $ws5
+bindcode $mod+Shift+85 	 move container to workspace  $ws6
+bindcode $mod+Shift+79 	 move container to workspace  $ws7
+bindcode $mod+Shift+80 	 move container to workspace  $ws8
+bindcode $mod+Shift+81 	 move container to workspace  $ws9
+bindcode $mod+Shift+90 	 move container to workspace  $ws10
+
+## Assign workspaces##
+######################
+#
+# $ws1 = Main browser
+assign [class=$browser1-win] $ws1
+for_window [class=$browser1-win] focus
+assign [class=$browser2-win] $ws1
+for_window [class=$browser2-win] focus
+
+# $ws2 = Terminals
+assign [class=$term-win] $ws2
+for_window [class=$term-win] focus
+assign [class=URxvt] $ws2
+for_window [class=URxvt] focus
+assign [class=kitty] $ws2
+for_window [class=kitty] focus
+assign [class=Texmaker] $ws2
+for_window [class=Texmaker] focus
+
+# $ws3 = File Manager
+assign [class=$files-win] $ws3
+for_window [class=$files-win] focus
+assign [name="ranger:*"] $ws3
+for_window [name="ranger:*"] focus
+
+# $ws4 = Office and Okular
+for_window [class="(?i)libreoffice.*"] move to workspace $ws4
+#assign [class="(?i)libreoffice.*"] $ws4
+#assign [class="(?i)soffice"] $ws4
+assign [class="libreoffice-impress"] $ws4
+for_window [class=libreoffice-impress] focus
+assign [class="(?i)libreoffice-calc"] $ws4
+for_window [class=libreoffice-calc] focus
+assign [class="libreoffice-writer"] $ws4
+for_window [class=libreoffice-writer] focus
+assign [class="libreoffice-draw"] $ws4
+for_window [class=libreoffice-draw] focus
+assign [class="Xreader"] $ws4
+for_window [class=Xreader] focus
+assign [class="okular"] $ws4
+for_window [class=okular] focus
+
+# $ws5 = Joplin
+assign [class="Joplin"] $ws5
+for_window [class="Joplin"] focus 
+
+# $ws6 = Virtual Box
+assign [class="VirtualBox Manager"] $ws6
+for_window [class="VirtualBox Manager"] focus 
+
+# $ws7 = Signal, Mail
+assign [class=Signal] $ws7
+for_window [class=Signal] focus
+assign [class=Thunderbird] $ws7
+for_window [class=Thunderbird] focus
+
+# $ws8 = Games, Multimedia
+assign [class="battle.net.exe"] $ws8
+for_window [class=battle.net.exe] focus
+assign [class="Spotify"] $ws8
+for_window [class=Spotify] focus
+assign [class="Steam"] $ws8
+for_window [class=Steam] focus
+
+## Reload, Restart and Logout ##
+################################
+#
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+####################################################
+### Set Status bar (choose i3status or i3blocks) ###
+####################################################
+#
+## Use i3bar-i3status to display a workspace bar ##
+###################################################
+#bar {
+#    status_command i3status
+#	position bottom
+#	output primary
+#	font pango:DejaVu Sans Mono 13
+#colors {
+#        separator          #666666
+#        background         #222222
+#        statusline         #dddddd
+#        focused_workspace  #0088CC #0088CC #ffffff
+#        active_workspace   #333333 #333333 #ffffff
+#        inactive_workspace #333333 #333333 #888888
+#        urgent_workspace   #2f343a #900000 #ffffff
+#    }
+#}
+#
+## Use i3-bar-i3blocks to display a workspace bar ##
+#################################################### 
+bar {
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf  
+    position top
+    font pango:Roboto Regular 10, FontAwesome 10
+    tray_output primary
+    workspace_min_width 35
+    strip_workspace_numbers yes
+#    i3bar_command i3bar --transparency
+    colors {
+       	     separator          #757575
+             background         #222222
+	#                  border                background         text     
+	focused_workspace  $bg-color             $focused-color     $text-color
+	inactive_workspace $inactive-bg-color    $inactive-bg-color $inactive-text-color
+	urgent_workspace   $urgent-bg-color      $urgent-bg-color   $text-color
+    }
+}
+
+bindsym $mod+m bar mode invisible
+bindsym $mod+Shift+m bar mode dock
+
+## Appearance and background ##
+###############################
+
+# Set wallpaper
+exec --no-startup-id nitrogen --restore
+
+# Transparency (choose xcompmgr or picom) 
+#exec --no-startup-id xcompmgr -c
+exec --no-startup-id picom -CGb
+
+# Set window borders and gaps
+default_border pixel 1
+default_floating_border pixel 2
+smart_gaps on
+smart_borders on
+gaps inner 5
+gaps outer 1
+# hide_edge_borders both 
+
+## Application properties ##
+############################
+
+## Application bindings
+bindsym $mod+b exec $browser1
+bindsym $mod+Shift+b exec $browser2
+bindsym $mod+Return exec $term
+bindsym $mod+n exec $files
+bindsym $mod+c exec $calc
+bindsym $mod+p exec flameshot full -p ~/Private/Media/Screenshots
+bindsym $mod+Shift+p exec flameshot gui -p ~/Private/Media/Screenshots
+
+## Autostart apps
+exec_always --no-startup-id nm-applet
+exec --no-startup-id conky
+exec --no-startup-id numlockx on
+exec --no-startup-id /var/lib/portmaster/portmaster-start app --data=/var/lib/portmaster 
+exec --no-startup-id flameshot
+#exec --no-startup-id /usr/bin/lxpolkit
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id blueberry-tray
+exec --no-startup-id redshift-gtk
+exec --no-startup-id ~/AppImages/pcloud
+
+## Set floating for pop-up windows
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="notification"] floating enable
+for_window [window_type="popup_menu"] floating enable
+
+## Set floating (nontiling) for special apps
+for_window [class="Xsane" instance="xsane"] floating enable
+for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="qt5ct" instance="qt5ct"] floating enable
+for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+for_window [class="Mintinstall.py"] floating enable
+for_window [class=$calc-win] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [class="zoom"] floating enable
+for_window [class="Nitrogen"] floating enable
+for_window [class="Lightdm-settings"] floating enable
+for_window [class="Warpinator"] floating enable
+
+#########################
+####### Launchers #######
+#########################
+
+## rofi bindings fancy application menu (rofi-theme-selector overrides this theme)
+# Rofi drun for Applications menu
+bindsym $mod+d exec rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi
+
+# Rofi run for run commands (floating mode)
+bindsym $mod+Shift+d exec rofi -modi run -show run -config ~/.config/rofi/rofidmenu.rasi
+
+# Rofi windows for window selector
+bindsym $mod+i exec rofi -modi window -show window -config ~/.config/rofi/rofidmenu.rasi
