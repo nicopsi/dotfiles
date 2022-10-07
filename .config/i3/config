@@ -381,8 +381,8 @@ for_window [class="obsidian"] focus
 # $ws6 = Virtualization, system
 assign [class="VirtualBox Manager"] $ws6
 for_window [class="VirtualBox Manager"] focus 
-assign [class="Virt-Manager"] $ws6
-for_window [class="Virt-Manager"] focus 
+assign [class="Virt-manager"] $ws6
+for_window [class="Virt-manager"] focus 
 assign [class="Portmaster"] $ws6
 for_window [class="Portmaster"] focus 
 
@@ -480,7 +480,7 @@ exec --no-startup-id conky
 exec --no-startup-id numlockx on
 exec --no-startup-id /var/lib/portmaster/portmaster-start app --data=/var/lib/portmaster 
 exec --no-startup-id flameshot
-#exec --no-startup-id udiskie -s 
+exec --no-startup-id udiskie -ans 
 
 #Polkits
 #Fedora:   exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
