@@ -51,11 +51,15 @@ if has('syntax') && has('eval')
   packadd! matchit
 endif
 
-" Set variables
+" Personal settings
 set number
 set ignorecase
 set smartcase
-" set clipboard=unnamedplus
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
+set clipboard=unnamedplus
+set nobackup nowritebackup
 
+nnoremap silent <cr> :noh<CR><CR>
 colorscheme ron
 

@@ -6,6 +6,7 @@ amd64-microcode
 arandr
 bleachbit
 blueman
+caca-utils
 conky
 cups
 curl
@@ -31,6 +32,7 @@ inxi
 kitty
 libreoffice
 libreoffice-gtk3
+libsrvg
 lightdm
 lightdm-gtk-greeter
 lightdm-gtk-greeter-settings

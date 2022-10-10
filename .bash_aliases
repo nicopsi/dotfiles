@@ -34,11 +34,14 @@ alias rm='rm -I'
 ## New commands
 alias speedtest='speedtest-cli'
 alias inxiful='inxi -Fxxx'
-alias off='shutdown now'
+alias off='systemctl poweroff'
+alias reboot='systemctl reboot'
+alias suspend='systemctl suspend'
 alias dunstoff='killall -SIGUSR1 dunst'
 alias dunston='killall -SIGUSR2 dunst'
 alias i3conf='vim ~/.config/i3/config'
 alias i3bconf='vim ~/.config/i3/i3blocks.conf'
+alias liveusb='~/dotfiles/liveusb.sh'
 
 ## External monitors
 alias monhi='xrandr --output eDP-1 --primary --pos 0x0 --output HDMI-1 --pos 1920x0 --mode 1920x1080 --rate 60 --dpi 141 --scale 1.4x1.4'
