@@ -1,14 +1,4 @@
-
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2019 Jan 26
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
+" Config Nico 14Oct2022
 
 " When started as "evim", evim.vim will already have done these settings, bail
 " out.
@@ -19,6 +9,7 @@ endif
 " Get the defaults that most users want.
 source $VIMRUNTIME/defaults.vim
 
+" Set backup and undo
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
 else
@@ -27,6 +18,10 @@ else
     set undofile	" keep an undo file (undo changes after closing)
   endif
 endif
+
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
+set undodir=~/.vim/undo
 
 if &t_Co > 2 || has("gui_running")
   " Switch on highlighting the last used search pattern.
@@ -52,14 +47,17 @@ if has('syntax') && has('eval')
 endif
 
 " Personal settings
+" -----------------------------------------------
+" -----------------------------------------------
+
+" Plugins
+
+" Set options
 set number
 set ignorecase
 set smartcase
-set backupdir=~/.vim/backup
-set directory=~/.vim/backup
 set clipboard=unnamedplus
-set nobackup nowritebackup
-
-nnoremap silent <cr> :noh<CR><CR>
 colorscheme ron
 
+" Keybindings and shortcuts
+nnoremap <C-cr> :noh<CR><CR>
