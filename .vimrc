@@ -60,4 +60,4 @@ set clipboard=unnamedplus
 colorscheme ron
 
 " Keybindings and shortcuts
-nnoremap <C-cr> :noh<CR><CR>
+nnoremap <C-h> :noh<CR><CR>
