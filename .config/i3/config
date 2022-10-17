@@ -389,8 +389,8 @@ for_window [class="Portmaster"] focus
 # $ws7 = Signal, Mail
 assign [class=Signal] $ws7
 for_window [class=Signal] focus
-assign [class=Thunderbird] $ws7
-for_window [class=Thunderbird] focus
+assign [class=thunderbird] $ws7
+for_window [class=thunderbird] focus
 assign [class=whatsapp-desktop] $ws7
 for_window [class=whatsapp-desktop] focus
 
