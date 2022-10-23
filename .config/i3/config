@@ -27,6 +27,9 @@ set $files-win Nemo
 set $rofitheme rofisidebar.rasi
 # set $rofitheme roficenter.rasi
 
+# Resolution
+exec --no-startup-id xrandr -s 1920x1080
+
 ## Set color variables ##
 #########################
 
