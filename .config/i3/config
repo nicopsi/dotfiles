@@ -479,11 +479,11 @@ bindsym --release $mod+Print exec scrot -sf -e 'mv $f ~/Private/Media/Screenshot
 
 ## Autostart apps
 exec_always --no-startup-id nm-applet
-exec --no-startup-id conky
 exec --no-startup-id numlockx on
 exec --no-startup-id /var/lib/portmaster/portmaster-start app --data=/var/lib/portmaster 
 exec --no-startup-id flameshot
 exec --no-startup-id udiskie -ans 
+exec --no-startup-id conky
 
 #Polkits
 #Fedora:   exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1

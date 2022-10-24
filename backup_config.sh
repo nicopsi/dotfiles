@@ -26,3 +26,4 @@ sleep 2
 
 echo "                          "
 echo "###### backup complete ######"
+sleep 2
