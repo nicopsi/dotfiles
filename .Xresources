@@ -21,7 +21,7 @@ Xft.lcdfilter:        lcddefault
 ! -------------------------------------------------------------------------------
 ! urxvt/xterm config
 ! -------------------------------------------------------------------------------
-*.font: xft:Monospace:size=10
+*.font: xft:Monospace:size=10, xft:DejaVu Sans:pixelsize=8
 *.letterSpace: -1
 *.cursorBlink: true
 *.scrollBar: false
