@@ -23,6 +23,9 @@ set $calc-win Gnome-calculator
 # File Manager
 set $files nemo
 set $files-win Nemo
+# Mail client
+set $mail thunderbird
+set $mail-win thunderbird
 # Rofi theme
 set $rofitheme rofisidebar.rasi
 # set $rofitheme roficenter.rasi
@@ -392,8 +395,8 @@ for_window [class="Portmaster"] focus
 # $ws7 = Signal, Mail
 assign [class=Signal] $ws7
 for_window [class=Signal] focus
-assign [class=thunderbird] $ws7
-for_window [class=thunderbird] focus
+assign [class=$mail] $ws7
+for_window [class=$mail-win] focus
 assign [class=whatsapp-desktop] $ws7
 for_window [class=whatsapp-desktop] focus
 
@@ -476,6 +479,7 @@ bindsym $mod+p exec flameshot full -p ~/Private/Media/Screenshots
 bindsym $mod+Shift+p exec flameshot gui -p ~/Private/Media/Screenshots
 bindsym Print exec scrot -e 'mv $f ~/Private/Media/Screenshots'
 bindsym --release $mod+Print exec scrot -sf -e 'mv $f ~/Private/Media/Screenshots'
+bindsym $mod+t exec $mail
 
 ## Autostart apps
 exec_always --no-startup-id nm-applet
