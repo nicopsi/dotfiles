@@ -58,14 +58,14 @@
 #battery,
 #clock,
 #cpu,
-#custom/weather,
+#custom-weather,
 #disk
 #memory,
 #mode,
 #network,
 #pulseaudio,
 #backlight,
-#custom/power,
+#custom-power,
 #tray {
     padding-left: 10px;
     padding-right: 10px;
@@ -157,6 +157,11 @@
 
 #backlight {
     /* No styles */
+}
+
+#custom-power {
+    color: red;
+    font-weight: bold;
 }
 
 #tray {

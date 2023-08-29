@@ -115,4 +115,10 @@
         "on-click": "pavucontrol"
     },
 
+    "custom/power": {
+            "tooltip": false,
+            "format": "",
+            "on-click": "bash $HOME/.config/waybar/scripts/poweroff.sh"
+        },
+
 }
