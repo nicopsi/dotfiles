@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 
-command -v jq >/dev/null 2>&1 || { echo >&2 "Program 'jq' required but it is not installed.  
+command -v jq >/dev/null 2>&1 || { echo >&2 "Program 'jq' required but it is not installed.
 Aborting."; exit 1; }
-command -v wget >/dev/null 2>&1 || { echo >&2 "Program 'wget' required but is not installed.  
+command -v wget >/dev/null 2>&1 || { echo >&2 "Program 'wget' required but is not installed.
 Aborting."; exit 1; }
 
-APIKEY="b35feb6a41a5a064a51936352b879203"
-#ZIPCODE="1234"
-CITY_ID="3435910"
-URL="http://api.openweathermap.org/data/2.5/weather?id=${CITY_ID}&units=metric&APPID=${APIKEY}&units=metric"
+# To use this script you need to create an API key here https://home.openweathermap.org
+# You need to put your Open Weather APIKEY here:
+APIKEY="keykey"
+# find your City ID here: https://openweathermap.org/
+# search for your city and copy the ID from the URL inside the browser.
+CITY_ID="idid"
+URL="http://api.openweathermap.org/data/2.5/weather?id=${CITY_ID}&units=metric&APPID=${APIKEY}"
 
 WEATHER_RESPONSE=$(wget -qO- "${URL}")
 
@@ -27,16 +30,7 @@ case $WEATHER_CONDITION in
     WEATHER_ICON=""
     ;;
   'Rain')
-    WEATHER_ICON=""
-    ;;
-  'Drizzle')
-    WEATHER_ICON=""
-    ;;
-  'Thunderstorm')
-    WEATHER_ICON=""
-    ;;
-  'Fog')
-    WEATHER_ICON=""
+    WEATHER_ICON=""
     ;;
   'Snow')
     WEATHER_ICON=""
@@ -46,5 +40,4 @@ case $WEATHER_CONDITION in
     ;;
 esac
 
-echo "${WEATHER_ICON}  ${WEATHER_TEMP}°C"
-#echo "${WEATHER_ICON}  ${WEATHER_TEMP}°C: ${WIND_SPEED} km/h ${WIND_DIR}"
+echo "${WEATHER_ICON}  ${WEATHER_TEMP}°C: ${WIND_SPEED} km/h ${WIND_DIR}"
