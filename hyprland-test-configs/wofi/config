@@ -1,0 +1,8 @@
+allow_images=true
+image_size=16
+insensitive=true
+#width=20%
+#height=80%
+#columns=1
+gtk_dark=true
+#location=left
